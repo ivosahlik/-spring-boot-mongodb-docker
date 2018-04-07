@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Products</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="/static/styles.css" th:href="@{/styles.css}"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+
+
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(products)}">
+
+        <div class="card container" style="margin-top: 20px; padding-top: 20px;">
+            <div class="card-header bg-info">
+                <h5 class="card-title">Product List</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Id</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Image URL</th>
+                            <th>List</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr th:each="product : ${products}">
+                            <td th:text="${product.id.toHexString()}"></td>
+                            <td th:text="${product.description}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.imageUrl}"></td>
+                            <td><a th:href="${'/product/show/' + product.id.toHexString()}">View</a> </td>
+                            <td><a th:href="${'/product/edit/' + product.id.toHexString()}">Edit</a> </td>
+                            <td><a th:href="${'/product/delete/' + product.id.toHexString()}">Delete</a> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/product/new">New Product</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
